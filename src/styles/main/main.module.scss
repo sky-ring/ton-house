@@ -1,0 +1,14 @@
+@import '../colors';
+
+.content {
+  @apply py-5 text-lg;
+  color: $primary-text;
+}
+
+.content p {
+  @apply my-6;
+}
+
+.content ul {
+  @apply my-6;
+}

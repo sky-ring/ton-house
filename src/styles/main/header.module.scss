@@ -1,0 +1,29 @@
+@import "../colors";
+
+.headerContainer{
+  @apply w-screen;
+  background-color: $primary-color;
+}
+
+.header {
+  @apply mx-auto max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg py-8;
+  @apply flex flex-row flex-nowrap items-baseline font-bold text-white;
+
+  justify-content: space-between;
+
+  h2 {
+    @apply text-2xl border-b-2;
+  }
+
+  ul {
+    li {
+      @apply inline ml-4;
+    }
+    a {
+      @apply text-white;
+    }
+    a:hover {
+      color: $secondary-text;
+    }
+  }
+}

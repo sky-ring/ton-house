@@ -1,0 +1,19 @@
+@import 'colors';
+@tailwind base;
+
+a {
+  @apply text-blue-400;
+}
+
+a:hover {
+  @apply text-blue-300;
+}
+
+@tailwind components;
+
+@tailwind utilities;
+
+body {
+  background-color: $background-color;
+}
+
