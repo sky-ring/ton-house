@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { AppConfig } from '@/utils/AppConfig';
 
 import Header from './Header';
-import Tabs from './Tabs';
+import { Tabs } from './Tabs';
 
 describe('Header Component', () => {
   describe('Render header', () => {

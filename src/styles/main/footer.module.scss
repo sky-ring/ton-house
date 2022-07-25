@@ -1,7 +1,8 @@
 @import '../colors';
 
 .footer {
-  @apply mx-auto max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg pt-8;
+  @apply mx-auto max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg;
+  @apply py-8 px-4;
   @apply flex flex-col flex-nowrap items-center justify-center;
   @apply text-white;
 

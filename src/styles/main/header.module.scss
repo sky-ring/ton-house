@@ -6,19 +6,22 @@
 }
 
 .header {
-  @apply mx-auto max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg py-4;
+  @apply mx-auto max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg;
+  @apply py-4 px-4;
 }
 
 .headerContent{
-  @apply flex flex-row flex-nowrap items-baseline font-bold text-white;
+  @apply flex flex-row flex-nowrap items-center font-bold text-white;
 
   justify-content: space-between;
 
   h2 {
-    @apply text-2xl;
+    @apply text-xl sm:text-2xl;
   }
 
   ul {
+    @apply hidden sm:inline-block;
+
     li {
       @apply inline ml-4;
     }
@@ -29,16 +32,33 @@
       color: $secondary-text;
     }
   }
+
+  .menuButton {
+    @apply cursor-pointer sm:hidden;
+    padding: 10px;
+    stroke: $primary-text;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      background-color: rgba($secondary-text, 0.2);
+    }
+  }
 }
 
 .tabs {
-  @apply flex flex-row flex-nowrap items-baseline justify-between mt-4;
-
-
+  @apply flex flex-col sm:flex-row flex-nowrap text-center items-stretch justify-center sm:items-baseline sm:justify-between;
+  @apply mt-4;
 }
 
 .tab {
   @apply opacity-80 cursor-pointer text-white;
+  @apply mb-4 sm:mb-0;
   transition: opacity 0.2s;
 
   &:hover{
@@ -60,4 +80,36 @@
     height: 3px;
     width: 20px;
   }
+}
+
+
+.header{
+  &Menu {
+    @apply block sm:hidden;
+  }
+  &Tab{
+    @apply hidden sm:block;
+  }
+}
+
+
+
+/* Menu Opening Animation/Transition Classes */
+.menuEnter {
+  opacity: 0;
+  transform: translateY(-100px);
+}
+.menuEnterActive {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms, transform 200ms;
+}
+.menuExit {
+  opacity: 1;
+  transform: translateY(0);
+}
+.menuExitActive {
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: opacity 200ms, transform 200ms;
 }
