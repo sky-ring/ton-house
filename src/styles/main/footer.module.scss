@@ -1,0 +1,29 @@
+@import '../colors';
+
+.footer {
+  @apply mx-auto max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg pt-8;
+  @apply flex flex-col flex-nowrap items-center justify-center;
+  @apply text-white;
+
+  border-top: 1px solid $secondary-text;
+}
+
+.copyright{
+  @apply mb-4;
+}
+
+.socials {
+  @apply flex flex-row flex-nowrap;
+
+  svg {
+    @apply mx-1 opacity-70;
+    width: 24px;
+    height: 24px;
+    fill: $primary-text;
+    transition: opacity 0.2s;
+    
+    &:hover {
+      @apply opacity-100;
+    }
+  }
+}

@@ -10,7 +10,7 @@
 }
 
 .headerContent{
-  @apply flex flex-row flex-nowrap items-baseline font-bold text-white py-4;
+  @apply flex flex-row flex-nowrap items-baseline font-bold text-white;
 
   justify-content: space-between;
 
@@ -47,5 +47,17 @@
 }
 
 .tabSelected {
-  @apply border-b-2 font-bold opacity-100;
+  @apply font-bold opacity-100 relative;
+
+  &:after {
+    content: "";
+    border-radius: 1.5px;
+    background: $secondary-text;
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3px;
+    width: 20px;
+  }
 }
