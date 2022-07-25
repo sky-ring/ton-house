@@ -12,7 +12,7 @@ type SocialLinkProps = {
 
 function SocialLink(props: SocialLinkProps) {
   return (
-    <Link passHref href={props.href}>
+    <Link passHref href={props.href} target="_blank">
       <a role="social">{props.icon}</a>
     </Link>
   );
