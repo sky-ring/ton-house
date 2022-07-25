@@ -6,13 +6,16 @@
 }
 
 .header {
-  @apply mx-auto max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg py-8;
-  @apply flex flex-row flex-nowrap items-baseline font-bold text-white;
+  @apply mx-auto max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg py-4;
+}
+
+.headerContent{
+  @apply flex flex-row flex-nowrap items-baseline font-bold text-white py-4;
 
   justify-content: space-between;
 
   h2 {
-    @apply text-2xl border-b-2;
+    @apply text-2xl;
   }
 
   ul {
@@ -26,4 +29,23 @@
       color: $secondary-text;
     }
   }
+}
+
+.tabs {
+  @apply flex flex-row flex-nowrap items-baseline justify-between mt-4;
+
+
+}
+
+.tab {
+  @apply opacity-80 cursor-pointer text-white;
+  transition: opacity 0.2s;
+
+  &:hover{
+    @apply opacity-100 text-white;
+  }
+}
+
+.tabSelected {
+  @apply border-b-2 font-bold opacity-100;
 }

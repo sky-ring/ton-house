@@ -6,6 +6,7 @@ const Index = () => {
   return (
     <Main
       meta={<Meta title="TON Status" description={AppConfig.description} />}
+      selectedTab="Home"
     >
       <h1 className="text-2xl font-bold">
         Boilerplate code for your Nextjs project with Tailwind CSS
