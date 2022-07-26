@@ -1,0 +1,21 @@
+@import '../colors';
+.container{
+  @apply flex flex-row flex-nowrap m-4 px-4 py-2 rounded;
+  background-color: $primary-color;
+
+  input {
+    @apply bg-transparent flex-1 outline-none text-white mx-4;
+    @apply min-w-0;
+  }
+}
+
+.button {
+  @apply bg-transparent outline-none;
+  @apply p-3;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    stroke: $primary-text;
+  }
+}
