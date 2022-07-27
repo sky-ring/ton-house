@@ -1,0 +1,17 @@
+@import '../colors';
+
+.table {
+  @apply w-full;
+  tbody > tr:nth-child(2n+2){
+    background-color: $primary-dark-color;
+  }
+
+  th {
+    @apply text-left text-sm font-light px-2;
+    color: $secondary-text;
+  }
+  
+  td {
+    @apply text-left text-base font-normal px-2;
+  }
+} 

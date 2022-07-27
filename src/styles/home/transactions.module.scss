@@ -1,0 +1,18 @@
+.container{
+  @apply px-0 pb-4;
+
+  h3 {
+    @apply mx-4 my-2;
+  }
+
+}
+
+.table {
+  th:first-child,td:first-child {
+    @apply pl-4;
+  }
+
+  th:last-child,td:last-child {
+    @apply pr-4;
+  }
+}

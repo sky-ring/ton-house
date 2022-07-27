@@ -10,6 +10,7 @@ type IMainProps = {
   meta: ReactNode;
   children: ReactNode;
   selectedTab: Tab;
+  title?: string;
 };
 
 const Main = (props: IMainProps) => (
@@ -17,7 +18,7 @@ const Main = (props: IMainProps) => (
     {props.meta}
     <Header tab={props.selectedTab} />
     <div className="mx-auto max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
-      <SearchBox />
+      <SearchBox title={props.title} />
       <div className={styles.content}>{props.children}</div>
       <Footer />
     </div>

@@ -1,0 +1,6 @@
+@import '../colors';
+
+.card {
+  @apply max-w-full px-4 py-2 rounded-lg;
+  background-color: $primary-color;
+}
