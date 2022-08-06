@@ -1,8 +1,10 @@
 @import "../colors";
+@import "../mixins";
 
 .headerContainer{
   @apply w-screen;
   background-color: $primary-color;
+  @include shadow-default;
 }
 
 .header {
