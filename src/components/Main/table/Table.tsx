@@ -32,13 +32,22 @@ export default function Table<DataType>(props: TableProps<DataType>) {
         </tr>
       </thead>
       <tbody>
-        {props.data.map((row: DataType, index) => (
-          <tr key={`row-${index}`}>
-            {Object.values(row).map((value, idx) => (
-              <td key={`col-${idx}`}>{value}</td>
-            ))}
-          </tr>
-        ))}
+        {props.data.map((row: any, index) => {
+          return (
+            <tr key={`row-${index}`}>
+              {Object.keys(props.columns).map((column) => {
+                // @ts-ignore
+                const formatter = props.columns[column].format;
+
+                return (
+                  <td key={`col-${column}`}>
+                    {formatter ? formatter(row[column]) : row[column]}
+                  </td>
+                );
+              })}
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

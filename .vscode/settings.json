@@ -12,9 +12,7 @@
   ],
   "jest.autoRun": {
     "watch": true, // Start the jest with the watch flag
-    "onStartup": [
-      "all-tests"
-    ] // Run all tests upon project launch
+    "onStartup": ["all-tests"] // Run all tests upon project launch
   },
   "jest.showCoverageOnLoad": true, // Show code coverage when the project is launched
   "jest.showTerminalOnLaunch": false, // Don't automatically open test explorer terminal on launch
@@ -23,11 +21,12 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "files.associations": {
-    "*.scss": "postcss"
-  },
-  "[postcss]": {
+  "scss.lint.unknownAtRules": "ignore",
+  // "files.associations": {
+  //   "*.scss": "scss"
+  // },
+  "[scss]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "stylelint.vscode-stylelint"
-  },
+    "editor.defaultFormatter": "vscode.css-language-features"
+  }
 }

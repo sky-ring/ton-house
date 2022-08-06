@@ -4,20 +4,31 @@ import Card from '@/components/Main/card/Card';
 import Table from '@/components/Main/table/Table';
 import styles from '@/styles/home/transactions.module.scss';
 
-export default function Transactions() {
+import type { Transaction } from './types';
+
+export type TransactionsProps = {
+  transactions: Transaction[];
+};
+
+const formatValue = (hash: string) =>
+  `${hash.slice(0, 6)}...${hash.slice(-6, -1)}`;
+
+export default function Transactions(props: TransactionsProps) {
   return (
     <Card className={styles.container}>
       <h3>Recent Transactions</h3>
       <Table
         className={styles.table}
         columns={{
-          slot: { title: 'SLOT' },
-          validator: { title: 'VALIDATOR', info: 'some info' },
+          hash: { title: 'HASH', format: formatValue },
+          account: {
+            title: 'ACCOUNT',
+            info: 'some info about the account',
+            format: formatValue,
+          },
+          lt: { title: 'LT' },
         }}
-        data={[
-          { slot: 23123123, validator: 'wdasdasd' },
-          { slot: 23123123, validator: 'wdasdasd' },
-        ]}
+        data={props.transactions}
       />
     </Card>
   );

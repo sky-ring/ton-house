@@ -8,7 +8,7 @@ import Index from '@/pages/index';
 describe('Index page', () => {
   describe('Render method', () => {
     it('should have h1 tag', () => {
-      render(<Index />);
+      render(<Index recentTransactions={[]} />);
 
       const heading = screen.getByRole('heading', {
         name: /Boilerplate code/,
