@@ -7,5 +7,7 @@ export type TableColumn = {
 export interface TableProps<DataType> {
   columns: Record<keyof DataType, TableColumn>;
   data: DataType[];
+  keyField: keyof DataType;
   className?: any;
+  enterAnimated?: boolean;
 }

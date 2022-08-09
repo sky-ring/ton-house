@@ -2,6 +2,7 @@
 
 .table {
   @apply w-full;
+  table-layout: fixed;
 
   tbody>tr:nth-child(2n+2) {
     background-color: $primary-dark-color;
@@ -10,9 +11,32 @@
   th {
     @apply text-left text-sm font-light px-2;
     color: $secondary-text;
+    width: 150px;
   }
 
   td {
     @apply text-left text-base font-normal px-2;
+    width: 150px;
+  }
+
+}
+
+
+.tableWrapper {
+  @apply overflow-auto;
+}
+
+.newRowAnimation {
+  animation-name: enter-animation;
+  animation-duration: 1s;
+}
+
+@keyframes enter-animation {
+  from {
+    filter: blur(2px);
+  }
+
+  to {
+    filter: blur(0);
   }
 }

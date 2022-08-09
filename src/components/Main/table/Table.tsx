@@ -8,47 +8,55 @@ import type { TableColumn, TableProps } from './Table.types';
 
 export default function Table<DataType>(props: TableProps<DataType>) {
   return (
-    <table
-      className={cn({
-        // @ts-ignore
-        [styles.table]: true,
-        [props.className]: !!props.className,
-      })}
-    >
-      <thead>
-        <tr>
-          {Object.entries(props.columns).map((column) => {
-            const columnData = column[1] as TableColumn;
+    <div className={styles.tableWrapper}>
+      <table
+        className={cn({
+          // @ts-ignore
+          [styles.table]: true,
+          [props.className]: !!props.className,
+        })}
+      >
+        <thead>
+          <tr>
+            {Object.entries(props.columns).map((column) => {
+              const columnData = column[1] as TableColumn;
 
+              return (
+                <th key={column[0]}>
+                  {columnData.title}
+                  {columnData.info !== undefined ? (
+                    <Tooltip text={columnData.info} />
+                  ) : null}
+                </th>
+              );
+            })}
+          </tr>
+        </thead>
+        <tbody>
+          {props.data.map((row: any) => {
             return (
-              <th key={column[0]}>
-                {columnData.title}
-                {columnData.info !== undefined ? (
-                  <Tooltip text={columnData.info} />
-                ) : null}
-              </th>
+              <tr
+                key={`row-${row[props.keyField]}`}
+                className={cn({
+                  // @ts-ignore
+                  [styles.newRowAnimation]: props.enterAnimated,
+                })}
+              >
+                {Object.keys(props.columns).map((column) => {
+                  // @ts-ignore
+                  const formatter = props.columns[column].format;
+
+                  return (
+                    <td key={`col-${column}`}>
+                      {formatter ? formatter(row[column]) : row[column]}
+                    </td>
+                  );
+                })}
+              </tr>
             );
           })}
-        </tr>
-      </thead>
-      <tbody>
-        {props.data.map((row: any, index) => {
-          return (
-            <tr key={`row-${index}`}>
-              {Object.keys(props.columns).map((column) => {
-                // @ts-ignore
-                const formatter = props.columns[column].format;
-
-                return (
-                  <td key={`col-${column}`}>
-                    {formatter ? formatter(row[column]) : row[column]}
-                  </td>
-                );
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   );
 }
