@@ -1,25 +1,25 @@
 @import '../colors';
 
-.container{
+.container {
   @apply relative m-1;
-  
+
   svg {
     @apply inline antialiased;
-    width:0.75rem;
-    height:0.75rem;
-    fill: rgba($secondary-text,0.8);
+    width: 0.75rem;
+    height: 0.75rem;
+    fill: rgba($secondary-text, 0.8);
   }
 
 }
 
 .info {
-  @apply absolute px-4 py-2 rounded-xl;
+  @apply absolute px-4 py-2 rounded-xl z-30;
 
   margin: 0 !important;
 
   top: calc(100% - 4px);
   left: calc(100% - 4px);
-  box-shadow: 0 1px 2px rgba(black,0.2);
+  box-shadow: 0 1px 2px rgba(black, 0.2);
   background-color: $background-color;
   min-width: 150px;
   max-width: 300px;
@@ -31,13 +31,16 @@
 .enter {
   opacity: 0;
 }
+
 .enterActive {
   opacity: 1;
   transition: opacity 200ms;
 }
+
 .exit {
   opacity: 1;
 }
+
 .exitActive {
   opacity: 0;
   transition: opacity 200ms;

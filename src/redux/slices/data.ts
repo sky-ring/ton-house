@@ -2,15 +2,18 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 import type { Transaction } from '@/components/Home/transactions/types';
+import type { ValidatorsInfoT } from '@/components/Home/validatorsInfo/types';
 
 import type { RootState } from '../store';
 
 export type DataState = {
   transactions: Transaction[];
+  validatorsInfo: ValidatorsInfoT[];
 };
 
 const initialState: DataState = {
   transactions: [],
+  validatorsInfo: [],
 };
 
 const handleSetTransactions = (
@@ -28,6 +31,21 @@ const handleAddTransaction = (
   state.transactions.pop();
   state.transactions.unshift(payload);
 };
+const handleSetValidatorsInfo = (
+  state: DataState,
+  { payload }: PayloadAction<ValidatorsInfoT[]>
+) => {
+  state.validatorsInfo.splice(0, state.validatorsInfo.length);
+  state.validatorsInfo.push(...payload);
+};
+
+const handleAddValidatorsInfo = (
+  state: DataState,
+  { payload }: PayloadAction<ValidatorsInfoT>
+) => {
+  state.validatorsInfo.shift();
+  state.validatorsInfo.push(payload);
+};
 
 export const dataSlice = createSlice({
   name: 'data',
@@ -35,10 +53,17 @@ export const dataSlice = createSlice({
   reducers: {
     addTransaction: handleAddTransaction,
     setTransactions: handleSetTransactions,
+    addValidatorsInfo: handleAddValidatorsInfo,
+    setValidatorsInfo: handleSetValidatorsInfo,
   },
 });
 
-export const { addTransaction, setTransactions } = dataSlice.actions;
+export const {
+  addTransaction,
+  setTransactions,
+  addValidatorsInfo,
+  setValidatorsInfo,
+} = dataSlice.actions;
 
 export const selectData = (state: RootState) => state.data;
 

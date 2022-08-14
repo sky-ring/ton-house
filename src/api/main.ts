@@ -1,6 +1,8 @@
 import type { Transaction } from '@/components/Home/transactions/types';
-import { addTransaction } from '@/redux/slices/data';
+import type { ValidatorsInfoT } from '@/components/Home/validatorsInfo/types';
+import { addTransaction, addValidatorsInfo } from '@/redux/slices/data';
 import { store } from '@/redux/store';
+import { BNtoNumber } from '@/utils/BigNumber';
 
 import { get } from '.';
 import type { Listener } from './socket';
@@ -20,5 +22,34 @@ export const recentTransactionsListener: Listener = {
     ) {
       dispatch(addTransaction(transaction));
     }
+  },
+};
+
+export const getRecentValidatorsInfo = async (): Promise<ValidatorsInfoT[]> => {
+  let { data } = await get('validators', {
+    params: {
+      count: 50,
+    },
+  });
+  data = data.map((validatorsInfo: any) => {
+    return {
+      ...validatorsInfo,
+      totalWeight: BNtoNumber(validatorsInfo.totalWeight),
+    };
+  });
+
+  return data;
+};
+
+export const recentValidatorsInfoListener: Listener = {
+  event: 'validators_info',
+  action: (dispatch, validatorsInfo: any) => {
+    const totalWeight = BNtoNumber(validatorsInfo.totalWeight);
+    dispatch(
+      addValidatorsInfo({
+        ...validatorsInfo,
+        totalWeight,
+      })
+    );
   },
 };
