@@ -2,7 +2,7 @@
 @import "../mixins";
 
 .headerContainer{
-  @apply w-screen;
+  @apply w-full;
   background-color: $primary-color;
   @include shadow-default;
 }

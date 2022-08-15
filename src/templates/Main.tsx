@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import type { ReactNode } from 'react';
 
 import Footer from '@/components/Main/footer/Footer';
@@ -11,6 +12,7 @@ type IMainProps = {
   children: ReactNode;
   selectedTab: Tab;
   title?: string;
+  className?: any;
 };
 
 const Main = (props: IMainProps) => (
@@ -19,7 +21,14 @@ const Main = (props: IMainProps) => (
     <Header tab={props.selectedTab} />
     <div className="mx-auto max-w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
       <SearchBox title={props.title} />
-      <div className={styles.content}>{props.children}</div>
+      <div
+        className={cn({
+          [styles.content as any]: true,
+          [props.className]: !!props.className,
+        })}
+      >
+        {props.children}
+      </div>
       <Footer />
     </div>
   </div>

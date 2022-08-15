@@ -27,6 +27,6 @@
   // },
   "[scss]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "vscode.css-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
