@@ -34,7 +34,7 @@ export const getRecentValidatorsInfo = async (): Promise<ValidatorsInfoT[]> => {
   data = data.map((validatorsInfo: any) => {
     return {
       ...validatorsInfo,
-      totalWeight: BNtoNumber(validatorsInfo.totalWeight),
+      totalWeight: BNtoNumber(validatorsInfo.totalWeight), // + 1e18 * (Math.random() - 0.5),
     };
   });
 
@@ -44,7 +44,7 @@ export const getRecentValidatorsInfo = async (): Promise<ValidatorsInfoT[]> => {
 export const recentValidatorsInfoListener: Listener = {
   event: 'validators_info',
   action: (dispatch, validatorsInfo: any) => {
-    const totalWeight = BNtoNumber(validatorsInfo.totalWeight);
+    const totalWeight = BNtoNumber(validatorsInfo.totalWeight); // + 1e18 * (Math.random() - 0.5);
     dispatch(
       addValidatorsInfo({
         ...validatorsInfo,
