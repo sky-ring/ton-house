@@ -7,8 +7,8 @@ import { BNtoNumber } from '@/utils/BigNumber';
 import { get } from '.';
 import type { Listener } from './socket';
 
-export const getRecentTransactions = async () => {
-  const { data } = await get('transactions/recent');
+export const getRecentTransactions = async (last?: number) => {
+  const { data } = await get('transactions/recent', { params: { last } });
   return data;
 };
 
