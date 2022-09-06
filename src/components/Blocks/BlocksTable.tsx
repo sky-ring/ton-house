@@ -9,26 +9,23 @@ import styles from '@/styles/home/transactions.module.scss';
 const formatValue = (hash: string) =>
   `${hash.slice(0, 6)}...${hash.slice(-6, -1)}`;
 
-export default function Transactions() {
-  const { transactions } = useAppSelector(selectData);
+export default function BlocksTable() {
+  const { blocks } = useAppSelector(selectData);
 
   return (
     <Card className={styles.container}>
-      <h3>Recent Transactions</h3>
+      <h3>Recent Blocks</h3>
       <Table
         className={styles.table}
         enterAnimated
-        keyField="hash"
+        keyField="root_hash"
         columns={{
-          hash: { title: 'HASH', format: formatValue },
-          account: {
-            title: 'ACCOUNT',
-            info: 'some info about the account',
-            format: formatValue,
-          },
-          lt: { title: 'LT' },
+          root_hash: { title: 'HASH', format: formatValue },
+          seqno: { title: 'SEQUENCE NO.' },
+          shard: { title: 'SHARD', format: formatValue },
+          transactionsCount: { title: 'TRANSACTIONS #' },
         }}
-        data={transactions}
+        data={blocks}
       />
     </Card>
   );

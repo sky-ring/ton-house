@@ -1,6 +1,11 @@
-import type { Transaction } from '@/components/Home/transactions/types';
-import type { ValidatorsInfoT } from '@/components/Home/validatorsInfo/types';
-import { addTransaction, addValidatorsInfo } from '@/redux/slices/data';
+import type { BlockT } from '@/components/Blocks/types';
+import type { Transaction } from '@/components/TransactionsTable/types';
+import type { ValidatorsInfoT } from '@/components/ValidatorsInfo/types';
+import {
+  addBlock,
+  addTransaction,
+  addValidatorsInfo,
+} from '@/redux/slices/data';
 import { store } from '@/redux/store';
 import { BNtoNumber } from '@/utils/BigNumber';
 
@@ -8,7 +13,7 @@ import { get } from '.';
 import type { Listener } from './socket';
 
 export const getRecentTransactions = async (last?: number) => {
-  const { data } = await get('transactions/recent', { params: { last } });
+  const { data } = await get('transactions', { params: { last } });
   return data;
 };
 
@@ -22,6 +27,18 @@ export const recentTransactionsListener: Listener = {
     ) {
       dispatch(addTransaction(transaction));
     }
+  },
+};
+
+export const getRecentBlocks = async (last?: number) => {
+  const { data } = await get('blocks', { params: { last } });
+  return data;
+};
+
+export const recentBlocksListener: Listener = {
+  event: 'blocks',
+  action: (dispatch, block: BlockT) => {
+    dispatch(addBlock(block));
   },
 };
 

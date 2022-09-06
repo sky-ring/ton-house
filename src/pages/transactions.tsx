@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 
 import { getRecentTransactions, recentTransactionsListener } from '@/api/main';
 import { useSubscribeSocket } from '@/api/socket';
-import Transactions from '@/components/Home/transactions/Transactions';
-import type { Transaction } from '@/components/Home/transactions/types';
+import TransactionsTable from '@/components/TransactionsTable/TransactionsTable';
+import type { Transaction } from '@/components/TransactionsTable/types';
 import { Meta } from '@/layouts/Meta';
 import { useAppDispatch } from '@/redux/hooks';
 import { setTransactions } from '@/redux/slices/data';
@@ -35,13 +35,13 @@ const TransactionsPage = (props: TransactionsPageProps) => {
       selectedTab="Transactions"
       className={styles.wrapper}
     >
-      <Transactions />
+      <TransactionsTable />
     </Main>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const recentTransactions = await getRecentTransactions(30);
+  const recentTransactions = await getRecentTransactions(50);
 
   return {
     props: {
