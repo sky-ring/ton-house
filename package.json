@@ -1,6 +1,6 @@
 {
-  "name": "ton-status",
-  "version": "0.1.0",
+  "name": "ton-house",
+  "version": "0.2.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,10 +12,6 @@
     "lint": "next lint",
     "check-types": "tsc --noEmit --pretty",
     "test": "jest",
-    "cypress": "cypress open",
-    "cypress:headless": "cypress run",
-    "e2e": "start-server-and-test dev http://localhost:3000 cypress",
-    "e2e:headless": "start-server-and-test dev http://localhost:3000 cypress:headless",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -37,7 +33,6 @@
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@next/bundle-analyzer": "^12.2.2",
-    "@testing-library/cypress": "^8.0.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@types/jest": "^28.1.5",
@@ -51,13 +46,11 @@
     "autoprefixer": "^10.4.7",
     "cross-env": "^7.0.3",
     "cssnano": "^5.1.12",
-    "cypress": "^10.3.0",
     "eslint": "^8.19.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-next": "^12.2.2",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.6.0",
     "eslint-plugin-jest-dom": "^4.0.2",
@@ -78,9 +71,8 @@
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
-    "start-server-and-test": "^1.14.0",
     "tailwindcss": "^3.1.6",
     "typescript": "^4.7.4"
   },
-  "author": "Ixartz (https://github.com/ixartz)"
+  "author": "Shayan Shojaei (https://github.com/shayan-shojaei)"
 }
