@@ -18,7 +18,6 @@ import { useAppDispatch } from '@/redux/hooks';
 import { setTransactions, setValidatorsInfo } from '@/redux/slices/data';
 import styles from '@/styles/home/index.module.scss';
 import { Main } from '@/templates/Main';
-import { AppConfig } from '@/utils/AppConfig';
 
 type IndexProps = {
   recentTransactions: Transaction[];
@@ -36,11 +35,7 @@ const Index = (props: IndexProps) => {
   useSubscribeSocket('validators', [recentValidatorsInfoListener]);
 
   return (
-    <Main
-      meta={<Meta title="TON Status" description={AppConfig.description} />}
-      selectedTab="Home"
-      className={styles.wrapper}
-    >
+    <Main meta={<Meta />} selectedTab="Home" className={styles.wrapper}>
       <TotalWeightChart />
       <TotalValidatorsChart />
       <TransactionsTable />

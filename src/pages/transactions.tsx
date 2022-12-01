@@ -10,7 +10,6 @@ import { useAppDispatch } from '@/redux/hooks';
 import { setTransactions } from '@/redux/slices/data';
 import styles from '@/styles/home/index.module.scss';
 import { Main } from '@/templates/Main';
-import { AppConfig } from '@/utils/AppConfig';
 
 type TransactionsPageProps = {
   recentTransactions: Transaction[];
@@ -26,12 +25,7 @@ const TransactionsPage = (props: TransactionsPageProps) => {
 
   return (
     <Main
-      meta={
-        <Meta
-          title="TON Status | Transactions"
-          description={AppConfig.description}
-        />
-      }
+      meta={<Meta title="Transactions" />}
       selectedTab="Transactions"
       className={styles.wrapper}
     >

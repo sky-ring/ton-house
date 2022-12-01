@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import React, { useState } from 'react';
 
+import Logo from '@/components/icons/logo';
 import MenuIcon from '@/components/icons/menu';
 import styles from '@/styles/main/header.module.scss';
 import { AppConfig } from '@/utils/AppConfig';
@@ -31,15 +31,13 @@ export default function Header({ tab }: HeaderProps) {
     <div className={styles.headerContainer}>
       <header className={styles.header}>
         <div className={styles.headerContent}>
-          <h2>{AppConfig.title}</h2>
-          <ul>
-            <li>
-              <Link href="/">Home</Link>
-            </li>
-            <li>
-              <Link href="/about">About</Link>
-            </li>
-          </ul>
+          <div className={styles.headerBrand}>
+            <Logo objectFit="scale-down" width={80} height={80} />
+            <span>
+              <h2>{AppConfig.site_name}</h2>
+              <h5>{AppConfig.description}</h5>
+            </span>
+          </div>
 
           <MenuButton onClick={handleMenuClick} />
         </div>

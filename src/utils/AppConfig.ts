@@ -1,6 +1,6 @@
 export const AppConfig = {
-  site_name: 'TON Status',
-  title: 'TON Status Monitor',
-  description: 'The Open Network Status Monitor',
+  site_name: 'TONHouse',
+  title: 'TON House',
+  description: 'Monitor The Open Network`s Status Easily!',
   locale: 'en',
 };

@@ -10,7 +10,7 @@ describe('Header Component', () => {
     it('should have title', () => {
       render(<Header tab="Home" />);
 
-      const title = screen.getByText(AppConfig.title);
+      const title = screen.getByText(AppConfig.site_name);
 
       expect(title).toBeVisible();
     });
@@ -39,14 +39,14 @@ describe('Header Component', () => {
       expect(tabs[4]?.textContent).toEqual('Tokens');
       expect(tabs[5]?.textContent).toEqual('Supply');
     });
-  });
 
-  it('should have the selected tab underlined', () => {
-    render(<Tabs selected="Home" />);
+    it('should have the selected tab underlined', () => {
+      render(<Tabs selected="Home" />);
 
-    const tabs = screen.getAllByRole('tab');
+      const tabs = screen.getAllByRole('tab');
 
-    expect(tabs[0]?.classList).toContain('tabSelected');
-    expect(tabs[1]?.classList).not.toContain('tabSelected');
+      expect(tabs[0]?.classList).toContain('tabSelected');
+      expect(tabs[1]?.classList).not.toContain('tabSelected');
+    });
   });
 });

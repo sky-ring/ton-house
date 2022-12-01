@@ -16,7 +16,9 @@ const formatLabel = (payload: ValidatorsInfoT) => {
     <>
       Total: {payload.total}
       <br />
-      Total Weight: {payload.totalWeight}
+      Total Weight: {payload.totalWeight.toExponential(4)}
+      <br />
+      <em>{new Date(payload.created ?? 0).toISOString()}</em>
     </>
   );
 };
@@ -37,7 +39,7 @@ export default function TotalValidatorsChart() {
           <Area
             dataKey="total"
             type="monotone"
-            fill="url(#grad)"
+            fill={COLORS.primaryDarkColor}
             stroke={COLORS.secondaryColor}
           />
         </AreaChart>

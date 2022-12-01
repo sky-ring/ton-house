@@ -4,7 +4,6 @@
 .headerContainer{
   @apply w-full;
   background-color: $primary-color;
-  @include shadow-default;
 }
 
 .header {
@@ -13,27 +12,9 @@
 }
 
 .headerContent{
-  @apply flex flex-row flex-nowrap items-center font-bold text-white;
+  @apply flex flex-row flex-nowrap items-center font-bold text-white pt-6 pb-4;
 
   justify-content: space-between;
-
-  h2 {
-    @apply text-xl sm:text-2xl;
-  }
-
-  ul {
-    @apply hidden sm:inline-block;
-
-    li {
-      @apply inline ml-4;
-    }
-    a {
-      @apply text-white;
-    }
-    a:hover {
-      color: $secondary-text;
-    }
-  }
 
   .menuButton {
     @apply cursor-pointer sm:hidden;
@@ -74,7 +55,7 @@
   &:after {
     content: "";
     border-radius: 1.5px;
-    background: $secondary-text;
+    background: $secondary-color;
     position: absolute;
     bottom: -4px;
     left: 50%;
@@ -94,6 +75,15 @@
   }
 }
 
+.headerBrand{
+  @apply flex flex-row flex-nowrap gap-6 items-center;
+  h2 {
+    @apply text-xl sm:text-3xl;
+  }
+  h5{
+    @apply text-sm sm:text-lg font-normal italic;
+  }
+}
 
 
 /* Menu Opening Animation/Transition Classes */

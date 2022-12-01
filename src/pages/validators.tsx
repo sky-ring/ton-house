@@ -14,7 +14,6 @@ import { useAppDispatch } from '@/redux/hooks';
 import { setValidatorsInfo } from '@/redux/slices/data';
 import styles from '@/styles/validators/validators.module.scss';
 import { Main } from '@/templates/Main';
-import { AppConfig } from '@/utils/AppConfig';
 
 type ValidatorsProps = {
   recentValidatorsInfo: ValidatorsInfoT[];
@@ -30,12 +29,7 @@ const Validators = (props: ValidatorsProps) => {
 
   return (
     <Main
-      meta={
-        <Meta
-          title="TON Status | Validators"
-          description={AppConfig.description}
-        />
-      }
+      meta={<Meta title="Validators" />}
       selectedTab="Validators"
       className={styles.wrapper}
     >

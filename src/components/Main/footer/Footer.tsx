@@ -28,7 +28,7 @@ export default function Footer() {
       <div className={styles.socials}>
         <SocialLink href="https://twitter.com" icon={<Twitter />} />
         <SocialLink
-          href="https://github.com/shayan-shojaei/ton-status"
+          href="https://github.com/shayan-shojaei/ton-house"
           icon={<GitHub />}
         />
       </div>

@@ -27,7 +27,7 @@ const BlocksPage = (props: BlocksPageProps) => {
   return (
     <Main
       meta={
-        <Meta title="TON Status | Blocks" description={AppConfig.description} />
+        <Meta title="TON House | Blocks" description={AppConfig.description} />
       }
       selectedTab="Blocks"
       className={styles.wrapper}

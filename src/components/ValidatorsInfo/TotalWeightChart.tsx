@@ -14,9 +14,11 @@ import type { ValidatorsInfoT } from './types';
 const formatLabel = (payload: ValidatorsInfoT) => {
   return (
     <>
-      Total Weight: {payload.totalWeight}
+      Total Weight: {payload.totalWeight.toExponential(4)}
       <br />
       Total: {payload.total}
+      <br />
+      <em>{new Date(payload.created ?? 0).toISOString()}</em>
     </>
   );
 };
@@ -27,20 +29,6 @@ export default function TotalWeightChart() {
     <Card className={styles.container}>
       <ResponsiveContainer>
         <AreaChart data={validatorsInfo}>
-          <defs>
-            <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
-              <stop
-                offset="5%"
-                stopColor={COLORS.primaryDarkColor}
-                stopOpacity={1}
-              />
-              <stop
-                offset="95%"
-                stopColor={COLORS.primaryColor}
-                stopOpacity={0.8}
-              />
-            </linearGradient>
-          </defs>
           <XAxis
             dataKey="created"
             tickFormatter={timestampToHour}
@@ -51,7 +39,7 @@ export default function TotalWeightChart() {
           <Area
             dataKey="totalWeight"
             type="monotone"
-            fill="url(#grad)"
+            fill={COLORS.primaryDarkColor}
             stroke={COLORS.secondaryColor}
           />
         </AreaChart>
