@@ -1,16 +1,16 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import type { BlockT } from '@/components/Blocks/types';
+import type { Block } from '@/components/Blocks/types';
 import type { Transaction } from '@/components/TransactionsTable/types';
-import type { ValidatorsInfoT } from '@/components/ValidatorsInfo/types';
+import type { ValidatorsInfo } from '@/components/ValidatorsInfo/types';
 
 import type { RootState } from '../store';
 
 export type DataState = {
   transactions: Transaction[];
-  validatorsInfo: ValidatorsInfoT[];
-  blocks: BlockT[];
+  validatorsInfo: ValidatorsInfo[];
+  blocks: Block[];
 };
 
 const initialState: DataState = {
@@ -27,16 +27,17 @@ const handleSetTransactions = (
   state.transactions.push(...payload);
 };
 
-const handleAddTransaction = (
+const handleAddTransactions = (
   state: DataState,
-  { payload }: PayloadAction<Transaction>
+  { payload }: PayloadAction<Transaction[]>
 ) => {
-  state.transactions.pop();
-  state.transactions.unshift(payload);
+  state.transactions.splice(-payload.length, payload.length);
+  state.transactions.unshift(...payload);
 };
+
 const handleSetValidatorsInfo = (
   state: DataState,
-  { payload }: PayloadAction<ValidatorsInfoT[]>
+  { payload }: PayloadAction<ValidatorsInfo[]>
 ) => {
   state.validatorsInfo.splice(0, state.validatorsInfo.length);
   state.validatorsInfo.push(...payload);
@@ -44,7 +45,7 @@ const handleSetValidatorsInfo = (
 
 const handleAddValidatorsInfo = (
   state: DataState,
-  { payload }: PayloadAction<ValidatorsInfoT>
+  { payload }: PayloadAction<ValidatorsInfo>
 ) => {
   state.validatorsInfo.pop();
   state.validatorsInfo.unshift(payload);
@@ -52,7 +53,7 @@ const handleAddValidatorsInfo = (
 
 const handleSetBlocks = (
   state: DataState,
-  { payload }: PayloadAction<BlockT[]>
+  { payload }: PayloadAction<Block[]>
 ) => {
   state.blocks.splice(0, state.blocks.length);
   state.blocks.push(...payload);
@@ -60,10 +61,10 @@ const handleSetBlocks = (
 
 const handleAddBlock = (
   state: DataState,
-  { payload }: PayloadAction<BlockT>
+  { payload }: PayloadAction<Block>
 ) => {
   const exists = state.blocks.findIndex(
-    (block) => block.root_hash === payload.root_hash
+    (block) => block.rootHash === payload.rootHash
   );
   if (exists !== -1) {
     // already exists
@@ -79,7 +80,7 @@ export const dataSlice = createSlice({
   name: 'data',
   initialState,
   reducers: {
-    addTransaction: handleAddTransaction,
+    addTransactions: handleAddTransactions,
     setTransactions: handleSetTransactions,
     addValidatorsInfo: handleAddValidatorsInfo,
     setValidatorsInfo: handleSetValidatorsInfo,
@@ -89,7 +90,7 @@ export const dataSlice = createSlice({
 });
 
 export const {
-  addTransaction,
+  addTransactions,
   setTransactions,
   addValidatorsInfo,
   setValidatorsInfo,

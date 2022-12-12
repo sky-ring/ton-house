@@ -10,16 +10,11 @@ export type Listener = {
   action: (dispatch: Dispatch<AnyAction>, ...args: any[]) => void;
 };
 
-export const useSubscribeSocket = (
-  namespace: string,
-  listeners: Listener[]
-) => {
+export const useSubscribeSocket = (listeners: Listener[]) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}/${namespace}`);
-
-    // socket.on('connect', () => console.log('connected'));
+    const socket = io(`${process.env.NEXT_PUBLIC_SOCKET_URL}`);
 
     listeners.forEach(({ event, action }) => {
       socket.on(event, (...args: any[]) => {
@@ -27,7 +22,6 @@ export const useSubscribeSocket = (
       });
     });
 
-    // cleanup socket connection
     return () => {
       socket.disconnect();
     };

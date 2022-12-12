@@ -9,6 +9,9 @@ import styles from '@/styles/home/transactions.module.scss';
 const formatValue = (hash: string) =>
   `${hash.slice(0, 6)}...${hash.slice(-6, -1)}`;
 
+const formatTransactionsCount = (transactions: string[]) =>
+  transactions.length.toString();
+
 export default function BlocksTable() {
   const { blocks } = useAppSelector(selectData);
 
@@ -18,12 +21,15 @@ export default function BlocksTable() {
       <Table
         className={styles.table}
         enterAnimated
-        keyField="root_hash"
+        keyField="rootHash"
         columns={{
-          root_hash: { title: 'HASH', format: formatValue },
-          seqno: { title: 'SEQUENCE NO.' },
+          rootHash: { title: 'HASH', format: formatValue },
+          sequenceNumber: { title: 'SEQUENCE NO.' },
           shard: { title: 'SHARD', format: formatValue },
-          transactionsCount: { title: 'TRANSACTIONS #' },
+          transactions: {
+            title: 'TRANSACTIONS #',
+            format: formatTransactionsCount,
+          },
         }}
         data={blocks}
       />

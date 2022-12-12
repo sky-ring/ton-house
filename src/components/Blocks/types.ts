@@ -1,14 +1,11 @@
 import type { Transaction } from '../TransactionsTable/types';
 
-export type BlockT = {
+export type Block = {
+  _id: string;
   workchain: number;
   shard: string;
-  seqno: number;
-  root_hash: string;
-  file_hash: string;
-  transactionsCount: number;
-};
-
-export type BlockInfoT = BlockT & {
-  transactions: Transaction[];
+  sequenceNumber: number;
+  rootHash: string;
+  fileHash: string;
+  transactions: string[] | Transaction[];
 };

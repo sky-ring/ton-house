@@ -1,5 +1,7 @@
 export type Transaction = {
-  account: string;
+  _id: string;
   hash: string;
+  account: string;
   lt: number;
+  createdAt: Date;
 };

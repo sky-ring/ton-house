@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@400;500;700;900&display=swap'); 
 @import 'colors';
 @tailwind base;
 
@@ -15,5 +16,6 @@ a:hover {
 
 body {
   background-color: $background-color;
+  font-family: 'Roboto', sans-serif;
 }
 

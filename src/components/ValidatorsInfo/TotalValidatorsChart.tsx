@@ -9,16 +9,16 @@ import styles from '@/styles/home/validatorsInfo.module.scss';
 import { timestampToHour } from '@/utils/Common';
 import { COLORS } from '@/utils/Constants';
 
-import type { ValidatorsInfoT } from './types';
+import type { ValidatorsInfo } from './types';
 
-const formatLabel = (payload: ValidatorsInfoT) => {
+const formatLabel = (payload: ValidatorsInfo) => {
   return (
     <>
       Total: {payload.total}
       <br />
-      Total Weight: {payload.totalWeight.toExponential(4)}
+      Total Weight: {payload.totalWeight}
       <br />
-      <em>{new Date(payload.created ?? 0).toISOString()}</em>
+      <em>{new Date(payload.createdAt).toISOString()}</em>
     </>
   );
 };
@@ -30,7 +30,7 @@ export default function TotalValidatorsChart() {
       <ResponsiveContainer>
         <AreaChart data={validatorsInfo}>
           <XAxis
-            dataKey="created"
+            dataKey="createdAt"
             tickFormatter={timestampToHour}
             tickLine={false}
             minTickGap={10}

@@ -1,10 +1,10 @@
 import type { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
 
-import { getRecentBlocks, recentBlocksListener } from '@/api/main';
+import { blocksListener, getBlocks } from '@/api/main';
 import { useSubscribeSocket } from '@/api/socket';
 import BlocksTable from '@/components/Blocks/BlocksTable';
-import type { BlockT } from '@/components/Blocks/types';
+import type { Block } from '@/components/Blocks/types';
 import { Meta } from '@/layouts/Meta';
 import { useAppDispatch } from '@/redux/hooks';
 import { setBlocks } from '@/redux/slices/data';
@@ -13,7 +13,7 @@ import { Main } from '@/templates/Main';
 import { AppConfig } from '@/utils/AppConfig';
 
 type BlocksPageProps = {
-  recentBlocks: BlockT[];
+  recentBlocks: Block[];
 };
 
 const BlocksPage = (props: BlocksPageProps) => {
@@ -22,7 +22,7 @@ const BlocksPage = (props: BlocksPageProps) => {
     dispatch(setBlocks(props.recentBlocks));
   }, []);
 
-  useSubscribeSocket('blocks', [recentBlocksListener]);
+  useSubscribeSocket([blocksListener]);
 
   return (
     <Main
@@ -38,7 +38,7 @@ const BlocksPage = (props: BlocksPageProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const recentBlocks = await getRecentBlocks(30);
+  const recentBlocks = await getBlocks(30);
 
   return {
     props: {

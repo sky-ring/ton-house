@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
 
-import { getRecentTransactions, recentTransactionsListener } from '@/api/main';
+import { getTransactions, transactionsListener } from '@/api/main';
 import { useSubscribeSocket } from '@/api/socket';
 import TransactionsTable from '@/components/TransactionsTable/TransactionsTable';
 import type { Transaction } from '@/components/TransactionsTable/types';
@@ -21,7 +21,7 @@ const TransactionsPage = (props: TransactionsPageProps) => {
     dispatch(setTransactions(props.recentTransactions));
   }, []);
 
-  useSubscribeSocket('transactions', [recentTransactionsListener]);
+  useSubscribeSocket([transactionsListener]);
 
   return (
     <Main
@@ -35,7 +35,7 @@ const TransactionsPage = (props: TransactionsPageProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const recentTransactions = await getRecentTransactions(50);
+  const recentTransactions = await getTransactions(50);
 
   return {
     props: {

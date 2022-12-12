@@ -23,7 +23,6 @@ export default function TransactionsTable() {
           hash: { title: 'HASH', format: formatValue },
           account: {
             title: 'ACCOUNT',
-            info: 'some info about the account',
             format: formatValue,
           },
           lt: { title: 'LT' },

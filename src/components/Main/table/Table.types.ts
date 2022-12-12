@@ -1,7 +1,7 @@
 export type TableColumn = {
   title: string;
   info?: string;
-  format?: (value: string) => string;
+  format?: (value: any) => string;
 };
 
 export interface TableProps<DataType> {

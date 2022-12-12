@@ -1,67 +1,62 @@
-import type { BlockT } from '@/components/Blocks/types';
+import type { Block } from '@/components/Blocks/types';
 import type { Transaction } from '@/components/TransactionsTable/types';
-import type { ValidatorsInfoT } from '@/components/ValidatorsInfo/types';
+import type { ValidatorsInfo } from '@/components/ValidatorsInfo/types';
 import {
   addBlock,
-  addTransaction,
+  addTransactions,
   addValidatorsInfo,
 } from '@/redux/slices/data';
-import { store } from '@/redux/store';
 import { BNtoNumber } from '@/utils/BigNumber';
 
 import { get } from '.';
 import type { Listener } from './socket';
 
-export const getRecentTransactions = async (last?: number) => {
-  const { data } = await get('transactions', { params: { last } });
+export const getTransactions = async (limit?: number) => {
+  const { data } = await get('transaction', { params: { limit } });
   return data;
 };
 
-export const recentTransactionsListener: Listener = {
-  event: 'transaction',
-  action: (dispatch, transaction: Transaction) => {
-    if (
-      !store
-        .getState()
-        .data.transactions.find((t) => t.hash === transaction.hash)
-    ) {
-      dispatch(addTransaction(transaction));
-    }
+export const transactionsListener: Listener = {
+  event: 'transactions.inserted',
+  action: (dispatch, transactions: Transaction[]) => {
+    dispatch(addTransactions(transactions));
   },
 };
 
-export const getRecentBlocks = async (last?: number) => {
-  const { data } = await get('blocks', { params: { last } });
+export const getBlocks = async (limit?: number) => {
+  const { data } = await get('block', { params: { limit } });
   return data;
 };
 
-export const recentBlocksListener: Listener = {
-  event: 'blocks',
-  action: (dispatch, block: BlockT) => {
+export const blocksListener: Listener = {
+  event: 'block.inserted',
+  action: (dispatch, block: Block) => {
     dispatch(addBlock(block));
   },
 };
 
-export const getRecentValidatorsInfo = async (): Promise<ValidatorsInfoT[]> => {
+export const getValidatorsInfo = async (
+  limit?: number
+): Promise<ValidatorsInfo[]> => {
   let { data } = await get('validators', {
     params: {
-      count: 50,
+      limit,
     },
   });
-  data = data.map((validatorsInfo: any) => {
+  data = data.map((validatorsInfo: ValidatorsInfo) => {
     return {
       ...validatorsInfo,
-      totalWeight: BNtoNumber(validatorsInfo.totalWeight), // + 1e18 * (Math.random() - 0.5),
+      totalWeight: BNtoNumber(validatorsInfo.totalWeight).toString(), // + 1e18 * (Math.random() - 0.5),
     };
   });
 
   return data;
 };
 
-export const recentValidatorsInfoListener: Listener = {
-  event: 'validators_info',
-  action: (dispatch, validatorsInfo: any) => {
-    const totalWeight = BNtoNumber(validatorsInfo.totalWeight); // + 1e18 * (Math.random() - 0.5);
+export const validatorsInfoListener: Listener = {
+  event: 'validators.inserted',
+  action: (dispatch, validatorsInfo: ValidatorsInfo) => {
+    const totalWeight = BNtoNumber(validatorsInfo.totalWeight).toString();
     dispatch(
       addValidatorsInfo({
         ...validatorsInfo,
