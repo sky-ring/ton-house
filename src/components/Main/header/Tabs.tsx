@@ -6,14 +6,7 @@ import styles from '@/styles/main/header.module.scss';
 
 import type { Tab } from './Header.types';
 
-const TABS: Tab[] = [
-  'Home',
-  'Validators',
-  'Transactions',
-  'Blocks',
-  'Tokens',
-  'Supply',
-];
+const TABS: Tab[] = ['Home', 'Validators', 'Transactions', 'Blocks'];
 
 type TabProps = {
   title: Tab;
