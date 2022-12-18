@@ -13,5 +13,18 @@ export type ValidatorsInfo = {
   main: number;
   totalWeight: string;
   validators: string[] | Validator[];
-  createdAt: Date;
+  createdAt: string;
 };
+
+export type ValidatorsInfoChart = {
+  total: number;
+  totalWeight: string;
+  createdAt: string;
+};
+
+export enum TimeWindow {
+  MONTH = 'month',
+  DAY = 'day',
+  HOUR = 'hour',
+  MINUTE = 'minute',
+}

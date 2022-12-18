@@ -1,0 +1,28 @@
+@import '../colors';
+
+.container {
+  @apply flex flex-row flex-wrap;
+  @apply w-full p-4 relative;
+}
+
+.section {
+  @apply flex-1 flex flex-row flex-nowrap items-center p-2;
+  min-width: 250px;
+
+  span {
+    @apply flex flex-col flex-nowrap ml-4 justify-center;
+    b {
+      @apply text-xs;
+    }
+    em {
+      @apply text-base;
+      color: $secondary-color;
+    }
+  }
+}
+
+.pulse{
+  @apply absolute;
+  right: 10px;
+  top: 10px;
+}

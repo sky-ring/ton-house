@@ -1,0 +1,31 @@
+@import '../colors';
+
+$pulse-color: #d6883f;
+
+.pulse {
+	background: $pulse-color;
+	border-radius: 50%;
+	height: 12px;
+	width: 12px;
+
+	box-shadow: 0 0 0 0 rgba($pulse-color, 1);
+	transform: scale(1);
+	animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba($pulse-color, 0.7);
+	}
+
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 10px rgba($pulse-color, 0);
+	}
+
+	100% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba($pulse-color, 0);
+	}
+} 

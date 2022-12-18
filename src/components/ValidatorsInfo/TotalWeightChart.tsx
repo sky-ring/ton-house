@@ -6,44 +6,48 @@ import ChartTooltip from '@/components/Main/charts/Tooltip';
 import { useAppSelector } from '@/redux/hooks';
 import { selectData } from '@/redux/slices/data';
 import styles from '@/styles/home/validatorsInfo.module.scss';
-import { timestampToHour } from '@/utils/Common';
 import { COLORS } from '@/utils/Constants';
 
-import type { ValidatorsInfo } from './types';
+import type { ValidatorsInfoChart } from './types';
 
-const formatLabel = (payload: ValidatorsInfo) => {
+const formatLabel = (payload: ValidatorsInfoChart) => {
   return (
     <>
-      Total Weight: {payload.totalWeight}
+      {payload.totalWeight}
       <br />
-      Total: {payload.total}
       <br />
-      <em>{new Date(payload.createdAt).toISOString()}</em>
+      <small>
+        <em>{payload.createdAt}</em>
+      </small>
     </>
   );
 };
 
 export default function TotalWeightChart() {
-  const { validatorsInfo } = useAppSelector(selectData);
+  const { validatorsInfoChart } = useAppSelector(selectData);
+
+  const tickFormatter = (tick: string): string => {
+    const splitted = tick.split('-');
+    return splitted[splitted.length - 1] || '';
+  };
+
   return (
     <Card className={styles.container}>
-      <ResponsiveContainer>
-        <AreaChart data={validatorsInfo}>
-          <XAxis
-            dataKey="createdAt"
-            tickFormatter={timestampToHour}
-            tickLine={false}
-            minTickGap={10}
-          />
-          <Tooltip content={<ChartTooltip />} formatter={formatLabel} />
-          <Area
-            dataKey="totalWeight"
-            type="monotone"
-            fill={COLORS.primaryDarkColor}
-            stroke={COLORS.secondaryColor}
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+      <h3>Total Weight</h3>
+      <div className={styles.chartWrapper}>
+        <ResponsiveContainer>
+          <AreaChart data={validatorsInfoChart}>
+            <XAxis dataKey="createdAt" tickLine tickFormatter={tickFormatter} />
+            <Tooltip content={<ChartTooltip />} formatter={formatLabel} />
+            <Area
+              dataKey="totalWeight"
+              type="monotone"
+              fill={COLORS.primaryDarkColor}
+              stroke={COLORS.secondaryColor}
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
     </Card>
   );
 }

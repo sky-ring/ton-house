@@ -1,7 +1,7 @@
 export type TableColumn = {
   title: string;
   info?: string;
-  format?: (value: any) => string;
+  format?: (value: any) => React.ReactNode;
 };
 
 export interface TableProps<DataType> {

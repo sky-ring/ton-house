@@ -10,7 +10,14 @@
       "error",
       {
         "singleQuote": true,
-        "endOfLine": "auto"
+        "endOfLine": "auto",
+        "useTabs": false
+      }
+    ],
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
       }
     ]
   },

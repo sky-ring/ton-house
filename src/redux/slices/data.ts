@@ -2,21 +2,33 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 import type { Block } from '@/components/Blocks/types';
+import type { NetworkStatus } from '@/components/NetworkStatus/types';
 import type { Transaction } from '@/components/TransactionsTable/types';
-import type { ValidatorsInfo } from '@/components/ValidatorsInfo/types';
+import type {
+  ValidatorsInfo,
+  ValidatorsInfoChart,
+} from '@/components/ValidatorsInfo/types';
 
 import type { RootState } from '../store';
 
 export type DataState = {
   transactions: Transaction[];
-  validatorsInfo: ValidatorsInfo[];
+  latestValidatorsInfo?: ValidatorsInfo;
+  validatorsInfoChart: ValidatorsInfoChart[];
   blocks: Block[];
+  networkStatus: NetworkStatus;
 };
 
 const initialState: DataState = {
   transactions: [],
-  validatorsInfo: [],
+  validatorsInfoChart: [],
   blocks: [],
+  networkStatus: {
+    blockHeight: 0,
+    blockTime: 0,
+    tps: 0,
+    blocksCount: 0,
+  },
 };
 
 const handleSetTransactions = (
@@ -35,20 +47,26 @@ const handleAddTransactions = (
   state.transactions.unshift(...payload);
 };
 
-const handleSetValidatorsInfo = (
+const handleSetValidatorsInfoChart = (
   state: DataState,
-  { payload }: PayloadAction<ValidatorsInfo[]>
+  { payload }: PayloadAction<ValidatorsInfoChart[]>
 ) => {
-  state.validatorsInfo.splice(0, state.validatorsInfo.length);
-  state.validatorsInfo.push(...payload);
+  state.validatorsInfoChart.splice(0, state.validatorsInfoChart.length);
+  state.validatorsInfoChart.push(...payload);
 };
 
-const handleAddValidatorsInfo = (
+const handleSetLatestValidatorsInfo = (
   state: DataState,
   { payload }: PayloadAction<ValidatorsInfo>
 ) => {
-  state.validatorsInfo.pop();
-  state.validatorsInfo.unshift(payload);
+  state.latestValidatorsInfo = payload;
+};
+
+const handleSetNetworkStatus = (
+  state: DataState,
+  { payload }: PayloadAction<NetworkStatus>
+) => {
+  Object.assign(state.networkStatus, payload);
 };
 
 const handleSetBlocks = (
@@ -82,20 +100,22 @@ export const dataSlice = createSlice({
   reducers: {
     addTransactions: handleAddTransactions,
     setTransactions: handleSetTransactions,
-    addValidatorsInfo: handleAddValidatorsInfo,
-    setValidatorsInfo: handleSetValidatorsInfo,
+    setLatestValidatorsInfo: handleSetLatestValidatorsInfo,
+    setValidatorsInfoChart: handleSetValidatorsInfoChart,
     setBlocks: handleSetBlocks,
     addBlock: handleAddBlock,
+    setNetworkStatus: handleSetNetworkStatus,
   },
 });
 
 export const {
   addTransactions,
   setTransactions,
-  addValidatorsInfo,
-  setValidatorsInfo,
+  setLatestValidatorsInfo,
+  setValidatorsInfoChart,
   addBlock,
   setBlocks,
+  setNetworkStatus,
 } = dataSlice.actions;
 
 export const selectData = (state: RootState) => state.data;

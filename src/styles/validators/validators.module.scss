@@ -2,3 +2,37 @@
   @apply flex flex-row flex-wrap;
   @apply gap-4;
 }
+
+.tableContainer {
+  @apply px-0 pb-4;
+  min-width: 300px;
+
+  h3 {
+    @apply mx-4 my-2;
+  }
+}
+
+
+.table {
+
+  th:first-child,
+  td:first-child {
+    @apply pl-4;
+  }
+
+  th:last-child,
+  td:last-child {
+    @apply pr-4;
+  }
+
+  td {
+    font-family: 'Roboto Mono', monospace;
+  }
+}
+
+.validatorsInfo { 
+  @apply w-full flex flex-col p-4;
+  span{
+    @apply my-2;
+  }
+}

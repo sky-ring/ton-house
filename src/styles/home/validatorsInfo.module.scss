@@ -1,5 +1,13 @@
 .container {
+  flex: 1;
+
+  h3 {
+    @apply mx-2 mt-2;
+  }
+
+}
+
+.chartWrapper {
   min-width: 320px;
   height: 400px;
-  flex: 1;
 }

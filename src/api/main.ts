@@ -1,10 +1,16 @@
 import type { Block } from '@/components/Blocks/types';
+import type { NetworkStatus } from '@/components/NetworkStatus/types';
 import type { Transaction } from '@/components/TransactionsTable/types';
-import type { ValidatorsInfo } from '@/components/ValidatorsInfo/types';
+import type {
+  ValidatorsInfo,
+  ValidatorsInfoChart,
+} from '@/components/ValidatorsInfo/types';
+import { TimeWindow } from '@/components/ValidatorsInfo/types';
 import {
   addBlock,
   addTransactions,
-  addValidatorsInfo,
+  setLatestValidatorsInfo,
+  setNetworkStatus,
 } from '@/redux/slices/data';
 import { BNtoNumber } from '@/utils/BigNumber';
 
@@ -23,7 +29,19 @@ export const transactionsListener: Listener = {
   },
 };
 
-export const getBlocks = async (limit?: number) => {
+export const getNetworkStatus = async (): Promise<NetworkStatus> => {
+  const { data } = await get('status');
+  return data;
+};
+
+export const networkStatusListener: Listener = {
+  event: 'networkStatus.changed',
+  action: (dispatch, networkStatus: NetworkStatus) => {
+    dispatch(setNetworkStatus(networkStatus));
+  },
+};
+
+export const getBlocks = async (limit?: number): Promise<Block[]> => {
   const { data } = await get('block', { params: { limit } });
   return data;
 };
@@ -35,20 +53,33 @@ export const blocksListener: Listener = {
   },
 };
 
-export const getValidatorsInfo = async (
-  limit?: number
-): Promise<ValidatorsInfo[]> => {
-  let { data } = await get('validators', {
+export const getValidatorsInfoChart = async (
+  limit: number = 24,
+  timeWindow: TimeWindow = TimeWindow.HOUR
+): Promise<ValidatorsInfoChart[]> => {
+  let { data } = await get('validators/chart', {
     params: {
       limit,
+      timeWindow,
     },
   });
-  data = data.map((validatorsInfo: ValidatorsInfo) => {
+  data = data.map((validatorsInfoChart: ValidatorsInfoChart) => {
     return {
-      ...validatorsInfo,
-      totalWeight: BNtoNumber(validatorsInfo.totalWeight).toString(), // + 1e18 * (Math.random() - 0.5),
+      createdAt: validatorsInfoChart.createdAt,
+      total: validatorsInfoChart.total,
+      totalWeight: BNtoNumber(validatorsInfoChart.totalWeight).toString(),
     };
   });
+  return data;
+};
+
+export const getLatestValidatorsInfo = async (): Promise<ValidatorsInfo> => {
+  let { data } = await get('validators/latest/populated');
+
+  data = {
+    ...data,
+    totalWeight: BNtoNumber(data.totalWeight).toString(),
+  };
 
   return data;
 };
@@ -58,7 +89,7 @@ export const validatorsInfoListener: Listener = {
   action: (dispatch, validatorsInfo: ValidatorsInfo) => {
     const totalWeight = BNtoNumber(validatorsInfo.totalWeight).toString();
     dispatch(
-      addValidatorsInfo({
+      setLatestValidatorsInfo({
         ...validatorsInfo,
         totalWeight,
       })
