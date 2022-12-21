@@ -10,7 +10,7 @@ import styles from '@/styles/home/transactions.module.scss';
 const formatHash = (hash: string) => (
   <Link passHref href={`https://tonscan.org/tx/${hash}`}>
     <a target="_blank">
-      {hash.slice(0, 6)}...${hash.slice(-6, -1)}
+      {hash.slice(0, 6)}…${hash.slice(-6, -1)}
     </a>
   </Link>
 );
@@ -18,7 +18,7 @@ const formatHash = (hash: string) => (
 const formatAccount = (account: string) => (
   <Link passHref href={`https://tonscan.org/address/${account}`}>
     <a target="_blank">
-      {account.slice(0, 6)}...${account.slice(-6, -1)}
+      {account.slice(0, 6)}…${account.slice(-6, -1)}
     </a>
   </Link>
 );
@@ -34,10 +34,11 @@ export default function TransactionsTable() {
         enterAnimated
         keyField="hash"
         columns={{
-          hash: { title: 'HASH', format: formatHash },
+          hash: { title: 'HASH', format: formatHash, tooltip: true },
           account: {
             title: 'ACCOUNT',
             format: formatAccount,
+            tooltip: true,
           },
           lt: { title: 'LT', info: 'Logical Time' },
         }}

@@ -7,7 +7,7 @@ import { selectData } from '@/redux/slices/data';
 import styles from '@/styles/home/transactions.module.scss';
 
 const formatValue = (hash: string) =>
-  `${hash.slice(0, 6)}...${hash.slice(-6, -1)}`;
+  `${hash.slice(0, 6)}…${hash.slice(-6, -1)}`;
 
 const formatTransactionsCount = (transactions: string[]) =>
   transactions.length.toString();
@@ -23,9 +23,9 @@ export default function BlocksTable() {
         enterAnimated
         keyField="rootHash"
         columns={{
-          rootHash: { title: 'HASH', format: formatValue },
+          rootHash: { title: 'HASH', format: formatValue, tooltip: true },
           sequenceNumber: { title: 'SEQUENCE NO.' },
-          shard: { title: 'SHARD', format: formatValue },
+          shard: { title: 'SHARD', format: formatValue, tooltip: true },
           transactions: {
             title: 'TRANSACTIONS #',
             format: formatTransactionsCount,

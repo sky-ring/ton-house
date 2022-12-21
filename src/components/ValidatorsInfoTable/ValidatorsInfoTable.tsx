@@ -9,7 +9,7 @@ import styles from '@/styles/validators/validators.module.scss';
 import type { Validator } from '../ValidatorsInfo/types';
 
 const formatValue = (hash: string) =>
-  `${hash.slice(0, 6)}...${hash.slice(-6, -1)}`;
+  `${hash.slice(0, 6)}…${hash.slice(-6, -1)}`;
 
 const formatDate = (value: string | number) => {
   const date = new Date(value).toLocaleString();
@@ -43,10 +43,12 @@ export default function ValidatorsInfoTable() {
               address: {
                 title: 'ADDRESS',
                 format: formatValue,
+                tooltip: true,
               },
               publicKey: {
                 title: 'PUBLIC KEY',
                 format: formatValue,
+                tooltip: true,
               },
               weight: {
                 title: 'WEIGHT',

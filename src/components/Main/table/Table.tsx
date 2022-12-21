@@ -43,11 +43,15 @@ export default function Table<DataType>(props: TableProps<DataType>) {
                 })}
               >
                 {Object.keys(props.columns).map((column) => {
-                  // @ts-ignore
-                  const formatter = props.columns[column].format;
+                  const { format: formatter, tooltip } = props.columns[
+                    column as keyof DataType
+                  ] as TableColumn;
 
                   return (
-                    <td key={`col-${column}`}>
+                    <td
+                      key={`col-${column}`}
+                      title={tooltip ? row[column] : null}
+                    >
                       {formatter ? formatter(row[column]) : row[column]}
                     </td>
                   );

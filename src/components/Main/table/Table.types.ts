@@ -1,6 +1,7 @@
 export type TableColumn = {
   title: string;
   info?: string;
+  tooltip?: boolean;
   format?: (value: any) => React.ReactNode;
 };
 
