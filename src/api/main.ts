@@ -54,8 +54,8 @@ export const blocksListener: Listener = {
 };
 
 export const getValidatorsInfoChart = async (
-  limit: number = 24,
-  timeWindow: TimeWindow = TimeWindow.HOUR
+  limit: number = 30,
+  timeWindow: TimeWindow = TimeWindow.DAY
 ): Promise<ValidatorsInfoChart[]> => {
   let { data } = await get('validators/chart', {
     params: {
