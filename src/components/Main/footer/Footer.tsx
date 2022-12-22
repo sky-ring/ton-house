@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 
-import { GitHub, Twitter } from '@/components/icons/socials';
+import { GitHub, Telegram } from '@/components/icons/socials';
 import styles from '@/styles/main/footer.module.scss';
 import { AppConfig } from '@/utils/AppConfig';
 
@@ -26,9 +26,9 @@ export default function Footer() {
         Copyright © {year} - {AppConfig.site_name}
       </div>
       <div className={styles.socials}>
-        <SocialLink href="https://twitter.com" icon={<Twitter />} />
+        <SocialLink href="https://t.me/skyring_org" icon={<Telegram />} />
         <SocialLink
-          href="https://github.com/shayan-shojaei/ton-house"
+          href="https://github.com/sky-ring/ton-house"
           icon={<GitHub />}
         />
       </div>
