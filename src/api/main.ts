@@ -57,20 +57,22 @@ export const getValidatorsInfoChart = async (
   limit: number = 30,
   timeWindow: TimeWindow = TimeWindow.DAY
 ): Promise<ValidatorsInfoChart[]> => {
-  let { data } = await get('validators/chart', {
+  const { data } = await get('validators/chart', {
     params: {
       limit,
       timeWindow,
     },
   });
-  data = data.map((validatorsInfoChart: ValidatorsInfoChart) => {
-    return {
-      createdAt: validatorsInfoChart.createdAt,
-      total: validatorsInfoChart.total,
-      totalWeight: BNtoNumber(validatorsInfoChart.totalWeight).toString(),
-    };
-  });
-  return data;
+  const result: ValidatorsInfoChart[] = data
+    .map((validatorsInfoChart: ValidatorsInfoChart) => {
+      return {
+        createdAt: validatorsInfoChart.createdAt,
+        total: validatorsInfoChart.total,
+        totalWeight: BNtoNumber(validatorsInfoChart.totalWeight).toString(),
+      } as ValidatorsInfoChart;
+    })
+    .reverse();
+  return result;
 };
 
 export const getLatestValidatorsInfo = async (): Promise<ValidatorsInfo> => {

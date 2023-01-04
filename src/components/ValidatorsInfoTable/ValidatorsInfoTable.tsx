@@ -7,14 +7,10 @@ import { selectData } from '@/redux/slices/data';
 import styles from '@/styles/validators/validators.module.scss';
 
 import type { Validator } from '../ValidatorsInfo/types';
+import ValidatorsStats from './ValidatorsStats';
 
 const formatValue = (hash: string) =>
   `${hash.slice(0, 6)}…${hash.slice(-6, -1)}`;
-
-const formatDate = (value: string | number) => {
-  const date = new Date(value).toLocaleString();
-  return date;
-};
 
 export default function ValidatorsInfoTable() {
   const { latestValidatorsInfo } = useAppSelector(selectData);
@@ -24,17 +20,7 @@ export default function ValidatorsInfoTable() {
       <h3>Latest Validators</h3>
       {latestValidatorsInfo ? (
         <>
-          <div className={styles.validatorsInfo}>
-            <span>
-              Main: {latestValidatorsInfo.main} Total:{' '}
-              {latestValidatorsInfo.total}
-            </span>
-            <span>Total Weight: {latestValidatorsInfo.totalWeight}</span>
-            <span>
-              {formatDate(latestValidatorsInfo.timeSince * 1000)} -{' '}
-              {formatDate(latestValidatorsInfo.timeUntill * 1000)}
-            </span>
-          </div>
+          <ValidatorsStats data={latestValidatorsInfo} />
           <Table
             className={styles.table}
             enterAnimated

@@ -40,7 +40,7 @@ export default function TransactionsTable() {
             format: formatAccount,
             tooltip: true,
           },
-          lt: { title: 'LT', info: 'Logical Time' },
+          lt: { title: 'LOGICAL TIME' },
         }}
         data={transactions}
       />
