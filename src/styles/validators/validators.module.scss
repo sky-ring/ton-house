@@ -33,8 +33,7 @@
 }
 
 .validatorsInfo { 
-  @apply flex flex-row flex-wrap p-3 m-2 rounded-md;
-  background-color: $primary-dark-color;
+  @apply w-full flex flex-row flex-wrap p-4;
 
   .stat {
     @apply flex-1 flex flex-col flex-nowrap mx-2;

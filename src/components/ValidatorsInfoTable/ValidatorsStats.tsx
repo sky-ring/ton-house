@@ -1,8 +1,10 @@
 import React from 'react';
 
+import { useAppSelector } from '@/redux/hooks';
+import { selectData } from '@/redux/slices/data';
 import styles from '@/styles/validators/validators.module.scss';
 
-import type { ValidatorsInfo } from '../ValidatorsInfo/types';
+import Card from '../Main/card/Card';
 
 type ValidatorsInfoStatProp = {
   title: string;
@@ -18,25 +20,26 @@ function StatItem(props: ValidatorsInfoStatProp) {
   );
 }
 
-type ValidatorsInfoProps = {
-  data: ValidatorsInfo;
-};
-
 const formatDate = (value: string | number) => {
   const date = new Date(value).toLocaleString();
   return date;
 };
 
-export default function ValidatorsStats(props: ValidatorsInfoProps) {
-  return (
-    <div className={styles.validatorsInfo}>
-      <StatItem title="TOTAL WEIGHT" value={props.data.totalWeight} />
-      <StatItem title="TOTAL VALIDATORS" value={props.data.total} />
-      <StatItem title="SINCE" value={formatDate(props.data.timeSince * 1000)} />
+export default function ValidatorsStats() {
+  const { latestValidatorsInfo } = useAppSelector(selectData);
+
+  return latestValidatorsInfo ? (
+    <Card className={styles.validatorsInfo}>
+      <StatItem title="TOTAL WEIGHT" value={latestValidatorsInfo.totalWeight} />
+      <StatItem title="TOTAL VALIDATORS" value={latestValidatorsInfo.total} />
+      <StatItem
+        title="SINCE"
+        value={formatDate(latestValidatorsInfo.timeSince * 1000)}
+      />
       <StatItem
         title="UNTILL"
-        value={formatDate(props.data.timeUntill * 1000)}
+        value={formatDate(latestValidatorsInfo.timeUntill * 1000)}
       />
-    </div>
-  );
+    </Card>
+  ) : null;
 }

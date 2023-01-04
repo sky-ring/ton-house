@@ -10,6 +10,7 @@ import type {
 } from '@/components/ValidatorsInfo/types';
 import { TimeWindow } from '@/components/ValidatorsInfo/types';
 import ValidatorsInfoTable from '@/components/ValidatorsInfoTable/ValidatorsInfoTable';
+import ValidatorsStats from '@/components/ValidatorsInfoTable/ValidatorsStats';
 import { Meta } from '@/layouts/Meta';
 import { useAppDispatch } from '@/redux/hooks';
 import {
@@ -39,6 +40,7 @@ const Validators = (props: ValidatorsProps) => {
       selectedTab="Validators"
       className={styles.wrapper}
     >
+      <ValidatorsStats />
       <TotalWeightChart />
       <TotalValidatorsChart />
       <ValidatorsInfoTable />
